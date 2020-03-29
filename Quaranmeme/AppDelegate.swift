@@ -17,15 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
-
         //Create the Popover
         let popover = NSPopover()
         
         popover.contentViewController = MainViewController()
         popover.contentSize = NSSize(width: 500, height: 550)
-        popover.contentViewController?.view = NSHostingView(rootView: contentView)        
+        popover.contentViewController?.view = NSHostingView(rootView: ParentView(viewRouter: ViewRouter()))
         
         statusBar = StatusBarController.init(popover)
     }

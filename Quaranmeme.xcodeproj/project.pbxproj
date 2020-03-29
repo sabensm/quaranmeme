@@ -17,6 +17,8 @@
 		2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FE242D7D280045A4BE /* MainViewController.swift */; };
 		2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D500242D8BDE0045A4BE /* AboutAppView.swift */; };
 		2790D504242D91800045A4BE /* norwester.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2790D503242D91800045A4BE /* norwester.otf */; };
+		2790D5082430263B0045A4BE /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D5072430263B0045A4BE /* ParentView.swift */; };
+		2790D50A243028380045A4BE /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D509243028380045A4BE /* ViewRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		2790D4FE242D7D280045A4BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2790D500242D8BDE0045A4BE /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		2790D503242D91800045A4BE /* norwester.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = norwester.otf; sourceTree = "<group>"; };
+		2790D5072430263B0045A4BE /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
+		2790D509243028380045A4BE /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 			children = (
 				2790D4FA242D79CA0045A4BE /* EventMonitor.swift */,
 				2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */,
+				2790D509243028380045A4BE /* ViewRouter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			children = (
 				2790D4E7242C43960045A4BE /* ContentView.swift */,
 				2790D500242D8BDE0045A4BE /* AboutAppView.swift */,
+				2790D5072430263B0045A4BE /* ParentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,8 +195,10 @@
 				2790D4FD242D7AAC0045A4BE /* StatusBarController.swift in Sources */,
 				2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */,
 				2790D4E8242C43960045A4BE /* ContentView.swift in Sources */,
+				2790D5082430263B0045A4BE /* ParentView.swift in Sources */,
 				2790D4E6242C43960045A4BE /* AppDelegate.swift in Sources */,
 				2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */,
+				2790D50A243028380045A4BE /* ViewRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

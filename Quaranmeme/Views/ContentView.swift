@@ -26,6 +26,8 @@ struct MyButtonStyle: ButtonStyle {
 
 struct ContentView: View {
     
+    @ObservedObject var viewRouter: ViewRouter
+    
     let arrayOfImages = ["image0", "image1", "image2", "image3", "image4", "image5"]
     
     func getRandomImage() {
@@ -67,7 +69,7 @@ struct ContentView: View {
                         .fontWeight(.semibold)
                 }
                 Button(action : {
-                    print("Learn about this app")
+                    self.viewRouter.currentPage = "page2"
                 }) {
                     Text("About")
                         .font(.caption)
@@ -84,6 +86,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ParentView(viewRouter: ViewRouter())
     }
 }
