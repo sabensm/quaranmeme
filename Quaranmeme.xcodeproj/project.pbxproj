@@ -12,6 +12,11 @@
 		2790D4EA242C439E0045A4BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2790D4E9242C439E0045A4BE /* Assets.xcassets */; };
 		2790D4ED242C439E0045A4BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2790D4EC242C439E0045A4BE /* Preview Assets.xcassets */; };
 		2790D4F0242C439E0045A4BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2790D4EE242C439E0045A4BE /* Main.storyboard */; };
+		2790D4FB242D79CA0045A4BE /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FA242D79CA0045A4BE /* EventMonitor.swift */; };
+		2790D4FD242D7AAC0045A4BE /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */; };
+		2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FE242D7D280045A4BE /* MainViewController.swift */; };
+		2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D500242D8BDE0045A4BE /* AboutAppView.swift */; };
+		2790D504242D91800045A4BE /* norwester.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2790D503242D91800045A4BE /* norwester.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,11 @@
 		2790D4EF242C439E0045A4BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2790D4F1242C439E0045A4BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2790D4F2242C439E0045A4BE /* Quaranmeme.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quaranmeme.entitlements; sourceTree = "<group>"; };
+		2790D4FA242D79CA0045A4BE /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		2790D4FE242D7D280045A4BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		2790D500242D8BDE0045A4BE /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
+		2790D503242D91800045A4BE /* norwester.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = norwester.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +65,16 @@
 		2790D4E4242C43960045A4BE /* Quaranmeme */ = {
 			isa = PBXGroup;
 			children = (
+				2790D502242D91750045A4BE /* Fonts */,
+				2790D4F9242D794D0045A4BE /* Views */,
+				2790D4F8242D79440045A4BE /* Helpers */,
 				2790D4E5242C43960045A4BE /* AppDelegate.swift */,
-				2790D4E7242C43960045A4BE /* ContentView.swift */,
 				2790D4E9242C439E0045A4BE /* Assets.xcassets */,
 				2790D4EE242C439E0045A4BE /* Main.storyboard */,
 				2790D4F1242C439E0045A4BE /* Info.plist */,
 				2790D4F2242C439E0045A4BE /* Quaranmeme.entitlements */,
 				2790D4EB242C439E0045A4BE /* Preview Content */,
+				2790D4FE242D7D280045A4BE /* MainViewController.swift */,
 			);
 			path = Quaranmeme;
 			sourceTree = "<group>";
@@ -72,6 +85,32 @@
 				2790D4EC242C439E0045A4BE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2790D4F8242D79440045A4BE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2790D4FA242D79CA0045A4BE /* EventMonitor.swift */,
+				2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2790D4F9242D794D0045A4BE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2790D4E7242C43960045A4BE /* ContentView.swift */,
+				2790D500242D8BDE0045A4BE /* AboutAppView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2790D502242D91750045A4BE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2790D503242D91800045A4BE /* norwester.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2790D4F0242C439E0045A4BE /* Main.storyboard in Resources */,
+				2790D504242D91800045A4BE /* norwester.otf in Resources */,
 				2790D4ED242C439E0045A4BE /* Preview Assets.xcassets in Resources */,
 				2790D4EA242C439E0045A4BE /* Assets.xcassets in Resources */,
 			);
@@ -145,8 +185,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2790D4FB242D79CA0045A4BE /* EventMonitor.swift in Sources */,
+				2790D4FD242D7AAC0045A4BE /* StatusBarController.swift in Sources */,
+				2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */,
 				2790D4E8242C43960045A4BE /* ContentView.swift in Sources */,
 				2790D4E6242C43960045A4BE /* AppDelegate.swift in Sources */,
+				2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
