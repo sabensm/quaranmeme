@@ -9,28 +9,49 @@
 import SwiftUI
 import AppKit
 
-struct MyButtonStyle: ButtonStyle {
-    var color: Color = .green
-    
-    public func makeBody(configuration: MyButtonStyle.Configuration) -> some View {
-        
-        configuration.label
-            .foregroundColor(.white)
-            .padding(15)
-            .background(RoundedRectangle(cornerRadius: 5).fill(color))
-            .compositingGroup()
-            .shadow(color: .black, radius: 3)
-            .opacity(configuration.isPressed ? 0.5 : 1.0)
-    }
-}
-
 struct ContentView: View {
     
     @ObservedObject var viewRouter: ViewRouter
     
+    let defaults = UserDefaults.standard
+    
     let arrayOfImages = ["image0", "image1", "image2", "image3", "image4", "image5"]
     
+    func setUserLastSeen() {
+        let date = Date()
+        defaults.set(date, forKey: "lastSeen")
+    }
+    
+    func memeConfig() {
+        let userLastSeen = defaults.object(forKey: "lastSeen")
+        
+        if userLastSeen != nil {
+            print("We are an existing user")
+            let elapsedTimeBetweenSessions = Date().timeIntervalSince(userLastSeen as! Date)
+            if elapsedTimeBetweenSessions > 14400 {
+                print("Update the memes!")
+            } else {
+                print("Reference userdefaults to pick a meme to show")
+            }
+        } else {
+            print("We're not an existing user")
+            updateMemeList()
+            setUserLastSeen()
+        }
+    }
+    
+    func updateMemeList() {
+        
+        //Networking code to go out and fetch latest memes and add them to an array, and then user defaults
+        
+    }
+    
+    
+    
     func getRandomImage() {
+        //when this button is pressed, we're just going to get a random meme from userdefaults array.
+        
+        
         let random = arrayOfImages.randomElement()!
         
         meme = random
@@ -77,11 +98,24 @@ struct ContentView: View {
                 }
             }.padding(.bottom, 18)
         }
-        .onAppear(perform: getRandomImage)
+        .onAppear(perform: memeConfig)
+        .onDisappear(perform: setUserLastSeen)
     }
 }
 
-
+struct MyButtonStyle: ButtonStyle {
+    var color: Color = .green
+    
+    public func makeBody(configuration: MyButtonStyle.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.white)
+            .padding(15)
+            .background(RoundedRectangle(cornerRadius: 5).fill(color))
+            .compositingGroup()
+            .shadow(color: .black, radius: 3)
+            .opacity(configuration.isPressed ? 0.5 : 1.0)
+    }
+}
 
 
 struct ContentView_Previews: PreviewProvider {
