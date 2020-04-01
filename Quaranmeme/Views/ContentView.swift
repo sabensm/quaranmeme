@@ -28,8 +28,9 @@ struct ContentView: View {
         if userLastSeen != nil {
             print("We are an existing user")
             let elapsedTimeBetweenSessions = Date().timeIntervalSince(userLastSeen as! Date)
-            if elapsedTimeBetweenSessions > 14400 {
+            if elapsedTimeBetweenSessions > 5 {
                 print("Update the memes!")
+                updateMemeList()
             } else {
                 print("Reference userdefaults to pick a meme to show")
             }
@@ -43,6 +44,45 @@ struct ContentView: View {
     func updateMemeList() {
         
         //Networking code to go out and fetch latest memes and add them to an array, and then user defaults
+        
+        let memeURL = URL(string: "https://raw.githubusercontent.com/sabensm/TestRepo/master/memes.json")
+        
+        guard let url = memeURL else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            //Any errors?
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                return
+            }
+            
+            //Is the response the correct / request successful?
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { debugPrint("Server Error")
+                return
+            }
+            //Make sure we have data
+            guard let data = data else { return }
+            // Parse JSON and cast as dictionary?
+            do {
+                guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else { return }
+                let arrayOfMemes = json["memes"] as? Array ?? []
+                print(arrayOfMemes)
+                let randomMemeFromArray = arrayOfMemes.randomElement()!
+                print(randomMemeFromArray)
+        
+                DispatchQueue.main.async {
+                    self.meme = (randomMemeFromArray as? String)!
+                }
+                
+            } catch {
+                debugPrint("JSON Error: \(error.localizedDescription)")
+                
+            }
+            
+            
+        }.resume()
+        
         
     }
     
