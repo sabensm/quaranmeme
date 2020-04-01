@@ -8,6 +8,7 @@
 
 import SwiftUI
 import AppKit
+import KingfisherSwiftUI
 
 struct ContentView: View {
     
@@ -26,30 +27,28 @@ struct ContentView: View {
         let userLastSeen = defaults.object(forKey: "lastSeen")
         
         if userLastSeen != nil {
-            print("We are an existing user")
             let elapsedTimeBetweenSessions = Date().timeIntervalSince(userLastSeen as! Date)
             if elapsedTimeBetweenSessions > 5 {
-                print("Update the memes!")
+                //User hasn't been to the app in over 4 hours, so we go out to get the freshest memes.
                 updateMemeList()
             } else {
-                print("Reference userdefaults to pick a meme to show")
+                //Since this condition means the user has used the app in the last 4 hours, we feel comfortable just referencing the defaults. There is no need to fetch the list again.
+                let random = defaults.array(forKey: "downloadedArrayOfMemes")!.randomElement()!
+                meme = random as! String
             }
         } else {
-            print("We're not an existing user")
+            //Firs time user - we need to get them memes!
             updateMemeList()
             setUserLastSeen()
         }
     }
     
     func updateMemeList() {
-        
-        //Networking code to go out and fetch latest memes and add them to an array, and then user defaults
-        
         let memeURL = URL(string: "https://raw.githubusercontent.com/sabensm/TestRepo/master/memes.json")
         
         guard let url = memeURL else { return }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        _ = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             //Any errors?
             if let error = error {
@@ -63,41 +62,40 @@ struct ContentView: View {
             }
             //Make sure we have data
             guard let data = data else { return }
-            // Parse JSON and cast as dictionary?
+            // Parse JSON and cast as an array
             do {
                 guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else { return }
                 let arrayOfMemes = json["memes"] as? Array ?? []
-                print(arrayOfMemes)
+                
+                //Get random image right away to display
                 let randomMemeFromArray = arrayOfMemes.randomElement()!
-                print(randomMemeFromArray)
-        
+                
+                //Take whole array and place into user defaults
+                self.defaults.set(arrayOfMemes, forKey: "downloadedArrayOfMemes")
+                
+                
                 DispatchQueue.main.async {
                     self.meme = (randomMemeFromArray as? String)!
                 }
-                
             } catch {
                 debugPrint("JSON Error: \(error.localizedDescription)")
-                
             }
-            
-            
         }.resume()
-        
-        
     }
-    
-    
     
     func getRandomImage() {
-        //when this button is pressed, we're just going to get a random meme from userdefaults array.
+        //This is used just for when the user is in the app. At this point, the user should have downloaded the meme list, and saved to UserDefaults
+        let defaultsArray = defaults.array(forKey: "downloadedArrayOfMemes")
         
-        
-        let random = arrayOfImages.randomElement()!
-        
-        meme = random
+        if defaultsArray != nil {
+            let random = defaultsArray?.randomElement()
+            meme = random as! String
+        } else {
+            updateMemeList()
+        }
     }
     
-    @State private var meme = "image3"
+    @State private var meme = ""
     
     var body: some View {
         VStack() {
@@ -106,7 +104,7 @@ struct ContentView: View {
                     .font(Font.custom("norwester", size: 48))
                     .padding(.top, 16)
             }
-            Image(meme)
+            KFImage(URL(string: meme))
                 .resizable()
                 .scaledToFit()
                 .shadow(color: .black, radius: 3)
