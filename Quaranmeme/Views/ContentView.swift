@@ -46,39 +46,45 @@ struct ContentView: View {
         
         guard let url = memeURL else { return }
         
-        _ = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            //Any errors?
-            if let error = error {
-                debugPrint(error.localizedDescription)
-                return
-            }
-            
-            //Is the response the correct / request successful?
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { debugPrint("Server Error")
-                return
-            }
-            //Make sure we have data
-            guard let data = data else { return }
-            // Parse JSON and cast as an array
-            do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else { return }
-                let arrayOfMemes = json["memes"] as? Array ?? []
+        if Reachability.isConnectedToNetwork(){
+            _ = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 
-                //Get random image right away to display
-                let randomMemeFromArray = arrayOfMemes.randomElement()!
-                
-                //Take whole array and place into user defaults
-                self.defaults.set(arrayOfMemes, forKey: "downloadedArrayOfMemes")
-                
-                
-                DispatchQueue.main.async {
-                    self.meme = (randomMemeFromArray as? String)!
+                //Any errors?
+                if let error = error {
+                    debugPrint(error.localizedDescription)
+                    return
                 }
-            } catch {
-                debugPrint("JSON Error: \(error.localizedDescription)")
-            }
-        }.resume()
+                
+                //Is the response the correct / request successful?
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { debugPrint("Server Error")
+                    return
+                }
+                //Make sure we have data
+                guard let data = data else { return }
+                // Parse JSON and cast as an array
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else { return }
+                    let arrayOfMemes = json["memes"] as? Array ?? []
+                    
+                    //Get random image right away to display
+                    let randomMemeFromArray = arrayOfMemes.randomElement()!
+                    
+                    //Take whole array and place into user defaults
+                    self.defaults.set(arrayOfMemes, forKey: "downloadedArrayOfMemes")
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.meme = (randomMemeFromArray as? String)!
+                    }
+                } catch {
+                    debugPrint("JSON Error: \(error.localizedDescription)")
+                }
+            }.resume()
+        }else{
+            //Want to do somethign where I use state to toggle the "Get Meme Button" and disable it 
+        }
+        
+        
     }
     
     func getRandomImage() {
@@ -104,12 +110,21 @@ struct ContentView: View {
                     .frame(width: 350, height: 50, alignment: .center)
                     .padding(.top, 16)
             }
-            KFImage(URL(string: meme))
+            if Reachability.isConnectedToNetwork() {
+                KFImage(URL(string: meme))
                 .resizable()
                 .scaledToFit()
                 .shadow(color: .black, radius: 3)
                 .border(Color.black, width: 2.0)
                 .padding(12)
+            } else {
+                Image("placeholder")
+                .resizable()
+                .scaledToFit()
+                .shadow(color: .black, radius: 3)
+                .border(Color.black, width: 2.0)
+                .padding(12)
+            }
             Button(action : {
                 self.getRandomImage()
             }) {
