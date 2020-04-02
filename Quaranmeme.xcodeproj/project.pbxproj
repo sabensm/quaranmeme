@@ -19,6 +19,7 @@
 		2790D5082430263B0045A4BE /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D5072430263B0045A4BE /* ParentView.swift */; };
 		2790D50A243028380045A4BE /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D509243028380045A4BE /* ViewRouter.swift */; };
 		27A675112434121600F0BB31 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 27A675102434121600F0BB31 /* KingfisherSwiftUI */; };
+		27A67513243585FB00F0BB31 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A67512243585FB00F0BB31 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		2790D500242D8BDE0045A4BE /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		2790D5072430263B0045A4BE /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
 		2790D509243028380045A4BE /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		27A67512243585FB00F0BB31 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				2790D4FA242D79CA0045A4BE /* EventMonitor.swift */,
 				2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */,
 				2790D509243028380045A4BE /* ViewRouter.swift */,
+				27A67512243585FB00F0BB31 /* Reachability.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */,
 				2790D4E8242C43960045A4BE /* ContentView.swift in Sources */,
 				2790D5082430263B0045A4BE /* ParentView.swift in Sources */,
+				27A67513243585FB00F0BB31 /* Reachability.swift in Sources */,
 				2790D4E6242C43960045A4BE /* AppDelegate.swift in Sources */,
 				2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */,
 				2790D50A243028380045A4BE /* ViewRouter.swift in Sources */,
