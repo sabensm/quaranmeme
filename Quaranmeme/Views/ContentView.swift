@@ -16,8 +16,6 @@ struct ContentView: View {
     
     let defaults = UserDefaults.standard
     
-    let arrayOfImages = ["image0", "image1", "image2", "image3", "image4", "image5"]
-    
     func setUserLastSeen() {
         let date = Date()
         defaults.set(date, forKey: "lastSeen")
@@ -100,8 +98,10 @@ struct ContentView: View {
     var body: some View {
         VStack() {
             HStack() {
-                Text("quaranMEME")
-                    .font(Font.custom("norwester", size: 48))
+                Image("Logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 350, height: 50, alignment: .center)
                     .padding(.top, 16)
             }
             KFImage(URL(string: meme))
@@ -118,7 +118,7 @@ struct ContentView: View {
                     .fontWeight(.semibold)
             }
             .buttonStyle(MyButtonStyle(color: .blue))
-            .padding(.bottom, 16)
+            .padding(.bottom, 10)
             HStack {
                 Button(action : {
                     NSApplication.shared.terminate(self)
@@ -147,7 +147,7 @@ struct MyButtonStyle: ButtonStyle {
     public func makeBody(configuration: MyButtonStyle.Configuration) -> some View {
         configuration.label
             .foregroundColor(.white)
-            .padding(15)
+            .padding(10)
             .background(RoundedRectangle(cornerRadius: 5).fill(color))
             .compositingGroup()
             .shadow(color: .black, radius: 3)
