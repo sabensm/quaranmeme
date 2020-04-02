@@ -16,7 +16,6 @@
 		2790D4FD242D7AAC0045A4BE /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */; };
 		2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FE242D7D280045A4BE /* MainViewController.swift */; };
 		2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D500242D8BDE0045A4BE /* AboutAppView.swift */; };
-		2790D504242D91800045A4BE /* norwester.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2790D503242D91800045A4BE /* norwester.otf */; };
 		2790D5082430263B0045A4BE /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D5072430263B0045A4BE /* ParentView.swift */; };
 		2790D50A243028380045A4BE /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D509243028380045A4BE /* ViewRouter.swift */; };
 		27A675112434121600F0BB31 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 27A675102434121600F0BB31 /* KingfisherSwiftUI */; };
@@ -35,7 +34,6 @@
 		2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		2790D4FE242D7D280045A4BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2790D500242D8BDE0045A4BE /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
-		2790D503242D91800045A4BE /* norwester.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = norwester.otf; sourceTree = "<group>"; };
 		2790D5072430263B0045A4BE /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
 		2790D509243028380045A4BE /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +69,6 @@
 		2790D4E4242C43960045A4BE /* Quaranmeme */ = {
 			isa = PBXGroup;
 			children = (
-				2790D502242D91750045A4BE /* Fonts */,
 				2790D4F9242D794D0045A4BE /* Views */,
 				2790D4F8242D79440045A4BE /* Helpers */,
 				2790D4E5242C43960045A4BE /* AppDelegate.swift */,
@@ -111,14 +108,6 @@
 				2790D5072430263B0045A4BE /* ParentView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2790D502242D91750045A4BE /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2790D503242D91800045A4BE /* norwester.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2790D4F0242C439E0045A4BE /* Main.storyboard in Resources */,
-				2790D504242D91800045A4BE /* norwester.otf in Resources */,
 				2790D4ED242C439E0045A4BE /* Preview Assets.xcassets in Resources */,
 				2790D4EA242C439E0045A4BE /* Assets.xcassets in Resources */,
 			);
