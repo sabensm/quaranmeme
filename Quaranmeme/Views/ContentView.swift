@@ -31,7 +31,7 @@ struct ContentView: View {
         
         if userLastSeen != nil {
             let elapsedTimeBetweenSessions = Date().timeIntervalSince(userLastSeen as! Date)
-            if elapsedTimeBetweenSessions > 5 {
+            if elapsedTimeBetweenSessions > 14440 {
                 //User hasn't been to the app in over 4 hours, so we go out to get the freshest memes.
                 updateMemeList()
             } else {
@@ -86,7 +86,9 @@ struct ContentView: View {
                 }
             }.resume()
         }else{
-            //Show an error to the user saying they should connect to the internet
+            self.alertTitle = "Not Online"
+            self.alertMessage = "No connection detected. Get online and try again"
+            self.showAlert = true
         }
         
         
@@ -96,27 +98,41 @@ struct ContentView: View {
         //Due to the program possibly sitting in the menu bar with no dismissal of the main view, we're going to track the user pressing this button - if it's been 4 or more hours, we'll go out and fetch the new memes here as well.
         
         let userLastClicked = defaults.object(forKey: "lastClicked")
+        let defaultsArray = defaults.array(forKey: "downloadedArrayOfMemes")
         
         if userLastClicked != nil {
             //check to see when the last tap was, and if it was over 4 hours ago, fetch new memes
             let elapsedTimeBetweenInteraciton = Date().timeIntervalSince(userLastClicked as! Date)
-            if elapsedTimeBetweenInteraciton > 5 {
+            if elapsedTimeBetweenInteraciton > 14440 {
                 updateMemeList()
+            } else {
+                if defaultsArray != nil {
+                    let random = defaultsArray?.randomElement()
+                    meme = random as! String
+                }
             }
         } else {
             //The user has never tapped this button, but we also know that they loaded the app successfully, so we can use an image from UserDefaults
-            let defaultsArray = defaults.array(forKey: "downloadedArrayOfMemes")
             if defaultsArray != nil {
                 let random = defaultsArray?.randomElement()
                 meme = random as! String
             } else {
-                //Hopefully we never get here, if we do, something has gone very wrong. We'll just display an error to the user.
+                self.alertTitle = "Unknown Error"
+                self.alertMessage = "You did something that caused the program to enter a condition it really never should have. You can try quitting and restarting the app but we make no promises it will work"
+                self.showAlert = true
+                
             }
         }
         setUserLastClickedButton()
     }
     
     @State private var meme = ""
+    @State private var showAlert = false
+    
+    //Alert variables
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+
     
     var body: some View {
         VStack() {
@@ -167,6 +183,9 @@ struct ContentView: View {
                         .fontWeight(.semibold)
                 }
             }.padding(.bottom, 18)
+        }
+        .alert(isPresented: $showAlert) {
+            return Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Got it!")))
         }
         .onAppear(perform: memeConfig)
         .onDisappear(perform: setUserLastSeen)
