@@ -21,6 +21,11 @@ struct ContentView: View {
         defaults.set(date, forKey: "lastSeen")
     }
     
+    func setUserLastClickedButton() {
+        let date = Date()
+        defaults.set(date, forKey: "lastClicked")
+    }
+    
     func memeConfig() {
         let userLastSeen = defaults.object(forKey: "lastSeen")
         
@@ -37,8 +42,8 @@ struct ContentView: View {
         } else {
             //Firs time user - we need to get them memes!
             updateMemeList()
-            setUserLastSeen()
         }
+        setUserLastSeen()
     }
     
     func updateMemeList() {
@@ -81,22 +86,34 @@ struct ContentView: View {
                 }
             }.resume()
         }else{
-            //Want to do somethign where I use state to toggle the "Get Meme Button" and disable it 
+            //Show an error to the user saying they should connect to the internet
         }
         
         
     }
     
     func getRandomImage() {
-        //This is used just for when the user is in the app. At this point, the user should have downloaded the meme list, and saved to UserDefaults
-        let defaultsArray = defaults.array(forKey: "downloadedArrayOfMemes")
+        //Due to the program possibly sitting in the menu bar with no dismissal of the main view, we're going to track the user pressing this button - if it's been 4 or more hours, we'll go out and fetch the new memes here as well.
         
-        if defaultsArray != nil {
-            let random = defaultsArray?.randomElement()
-            meme = random as! String
+        let userLastClicked = defaults.object(forKey: "lastClicked")
+        
+        if userLastClicked != nil {
+            //check to see when the last tap was, and if it was over 4 hours ago, fetch new memes
+            let elapsedTimeBetweenInteraciton = Date().timeIntervalSince(userLastClicked as! Date)
+            if elapsedTimeBetweenInteraciton > 5 {
+                updateMemeList()
+            }
         } else {
-            updateMemeList()
+            //The user has never tapped this button, but we also know that they loaded the app successfully, so we can use an image from UserDefaults
+            let defaultsArray = defaults.array(forKey: "downloadedArrayOfMemes")
+            if defaultsArray != nil {
+                let random = defaultsArray?.randomElement()
+                meme = random as! String
+            } else {
+                //Hopefully we never get here, if we do, something has gone very wrong. We'll just display an error to the user.
+            }
         }
+        setUserLastClickedButton()
     }
     
     @State private var meme = ""
