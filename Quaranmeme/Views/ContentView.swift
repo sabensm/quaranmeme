@@ -26,6 +26,16 @@ struct ContentView: View {
         defaults.set(date, forKey: "lastClicked")
     }
     
+    func restartApp() {
+        let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
+        let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
+        let task = Process()
+        task.launchPath = "/usr/bin/open"
+        task.arguments = [path]
+        task.launch()
+        exit(0)
+    }
+    
     func memeConfig() {
         let userLastSeen = defaults.object(forKey: "lastSeen")
         
@@ -86,9 +96,7 @@ struct ContentView: View {
                 }
             }.resume()
         }else{
-            self.alertTitle = "Not Online"
-            self.alertMessage = "No connection detected. Get online and try again"
-            self.showAlert = true
+            //Nothing really to do here. User is being displayed a message to connect to the internet.
         }
         
         
@@ -158,15 +166,27 @@ struct ContentView: View {
                 .border(Color.black, width: 2.0)
                 .padding(12)
             }
-            Button(action : {
-                self.getRandomImage()
-            }) {
-                Text("Get Fresh Meme!")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+            if Reachability.isConnectedToNetwork() {
+                Button(action : {
+                    self.getRandomImage()
+                }) {
+                    Text("Get Fresh Meme!")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                }
+                .buttonStyle(MyButtonStyle(color: .blue))
+                .padding(.bottom, 10)
+            } else {
+                Button(action : {
+                    self.restartApp()
+                }) {
+                    Text("No Connection Found. Click to Restart Once Connected")
+                        .font(.body)
+                        .fontWeight(.semibold)
+                }
+                .buttonStyle(MyButtonStyle(color: .red))
+                .padding(.bottom, 10)
             }
-            .buttonStyle(MyButtonStyle(color: .blue))
-            .padding(.bottom, 10)
             HStack {
                 Button(action : {
                     NSApplication.shared.terminate(self)
