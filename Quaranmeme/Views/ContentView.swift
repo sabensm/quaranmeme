@@ -12,6 +12,7 @@ import KingfisherSwiftUI
 
 struct ContentView: View {
     
+    //Here to listen for what page to display.
     @ObservedObject var viewRouter: ViewRouter
     
     let defaults = UserDefaults.standard
@@ -26,16 +27,7 @@ struct ContentView: View {
         defaults.set(date, forKey: "lastClicked")
     }
     
-    func restartApp() {
-        let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
-        let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
-        let task = Process()
-        task.launchPath = "/usr/bin/open"
-        task.arguments = [path]
-        task.launch()
-        exit(0)
-    }
-    
+    //This gets called every time the view appears
     func memeConfig() {
         let userLastSeen = defaults.object(forKey: "lastSeen")
         
@@ -56,6 +48,7 @@ struct ContentView: View {
         setUserLastSeen()
     }
     
+    //Code to handle updating the meme list
     func updateMemeList() {
         let memeURL = URL(string: "https://raw.githubusercontent.com/sabensm/TestRepo/master/memes.json")
         
@@ -102,9 +95,8 @@ struct ContentView: View {
         
     }
     
+    //Function to control getting a random meme from the list (and sometimes going out to refresh the list if it's stale)
     func getRandomImage() {
-        //Due to the program possibly sitting in the menu bar with no dismissal of the main view, we're going to track the user pressing this button - if it's been 4 or more hours, we'll go out and fetch the new memes here as well.
-        
         let userLastClicked = defaults.object(forKey: "lastClicked")
         let defaultsArray = defaults.array(forKey: "downloadedArrayOfMemes")
         
@@ -126,7 +118,7 @@ struct ContentView: View {
                 meme = random as! String
             } else {
                 self.alertTitle = "Unknown Error"
-                self.alertMessage = "You did something that caused the program to enter a condition it really never should have. You can try quitting and restarting the app but we make no promises it will work"
+                self.alertMessage = "You did something that caused the program to enter a condition it really never should have. You can try quitting and restarting the app but we make no promises it will work."
                 self.showAlert = true
                 
             }
@@ -134,6 +126,19 @@ struct ContentView: View {
         setUserLastClickedButton()
     }
     
+    //In some cases the user may be offline. If that's the case, we give them instruction to reconnect and restart the app by clicking a button. This restarts the app
+    func restartApp() {
+        let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
+        let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
+        let task = Process()
+        task.launchPath = "/usr/bin/open"
+        task.arguments = [path]
+        task.launch()
+        exit(0)
+    }
+    
+    
+    //Config variables
     @State private var meme = ""
     @State private var showAlert = false
     
@@ -141,6 +146,8 @@ struct ContentView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
 
+    
+    //MARK: UserInterface
     
     var body: some View {
         VStack() {
