@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,10 @@
 		2790D4FD242D7AAC0045A4BE /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */; };
 		2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D4FE242D7D280045A4BE /* MainViewController.swift */; };
 		2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D500242D8BDE0045A4BE /* AboutAppView.swift */; };
-		2790D504242D91800045A4BE /* norwester.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2790D503242D91800045A4BE /* norwester.otf */; };
+		2790D5082430263B0045A4BE /* ParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D5072430263B0045A4BE /* ParentView.swift */; };
+		2790D50A243028380045A4BE /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790D509243028380045A4BE /* ViewRouter.swift */; };
+		27A675112434121600F0BB31 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 27A675102434121600F0BB31 /* KingfisherSwiftUI */; };
+		27A67513243585FB00F0BB31 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A67512243585FB00F0BB31 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +35,9 @@
 		2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		2790D4FE242D7D280045A4BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2790D500242D8BDE0045A4BE /* AboutAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
-		2790D503242D91800045A4BE /* norwester.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = norwester.otf; sourceTree = "<group>"; };
+		2790D5072430263B0045A4BE /* ParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentView.swift; sourceTree = "<group>"; };
+		2790D509243028380045A4BE /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
+		27A67512243585FB00F0BB31 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A675112434121600F0BB31 /* KingfisherSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,7 +71,6 @@
 		2790D4E4242C43960045A4BE /* Quaranmeme */ = {
 			isa = PBXGroup;
 			children = (
-				2790D502242D91750045A4BE /* Fonts */,
 				2790D4F9242D794D0045A4BE /* Views */,
 				2790D4F8242D79440045A4BE /* Helpers */,
 				2790D4E5242C43960045A4BE /* AppDelegate.swift */,
@@ -92,6 +97,8 @@
 			children = (
 				2790D4FA242D79CA0045A4BE /* EventMonitor.swift */,
 				2790D4FC242D7AAC0045A4BE /* StatusBarController.swift */,
+				2790D509243028380045A4BE /* ViewRouter.swift */,
+				27A67512243585FB00F0BB31 /* Reachability.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -101,16 +108,9 @@
 			children = (
 				2790D4E7242C43960045A4BE /* ContentView.swift */,
 				2790D500242D8BDE0045A4BE /* AboutAppView.swift */,
+				2790D5072430263B0045A4BE /* ParentView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2790D502242D91750045A4BE /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2790D503242D91800045A4BE /* norwester.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +129,9 @@
 			dependencies = (
 			);
 			name = Quaranmeme;
+			packageProductDependencies = (
+				27A675102434121600F0BB31 /* KingfisherSwiftUI */,
+			);
 			productName = Quaranmeme;
 			productReference = 2790D4E2242C43960045A4BE /* Quaranmeme.app */;
 			productType = "com.apple.product-type.application";
@@ -157,6 +160,9 @@
 				Base,
 			);
 			mainGroup = 2790D4D9242C43960045A4BE;
+			packageReferences = (
+				27A6750F2434121600F0BB31 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 2790D4E3242C43960045A4BE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -172,7 +178,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2790D4F0242C439E0045A4BE /* Main.storyboard in Resources */,
-				2790D504242D91800045A4BE /* norwester.otf in Resources */,
 				2790D4ED242C439E0045A4BE /* Preview Assets.xcassets in Resources */,
 				2790D4EA242C439E0045A4BE /* Assets.xcassets in Resources */,
 			);
@@ -189,8 +194,11 @@
 				2790D4FD242D7AAC0045A4BE /* StatusBarController.swift in Sources */,
 				2790D501242D8BDE0045A4BE /* AboutAppView.swift in Sources */,
 				2790D4E8242C43960045A4BE /* ContentView.swift in Sources */,
+				2790D5082430263B0045A4BE /* ParentView.swift in Sources */,
+				27A67513243585FB00F0BB31 /* Reachability.swift in Sources */,
 				2790D4E6242C43960045A4BE /* AppDelegate.swift in Sources */,
 				2790D4FF242D7D280045A4BE /* MainViewController.swift in Sources */,
+				2790D50A243028380045A4BE /* ViewRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +397,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		27A6750F2434121600F0BB31 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		27A675102434121600F0BB31 /* KingfisherSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27A6750F2434121600F0BB31 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = KingfisherSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2790D4DA242C43960045A4BE /* Project object */;
 }
